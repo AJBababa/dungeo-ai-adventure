@@ -1,0 +1,212 @@
+/* =============================== */
+/* CONTENEDOR PRINCIPAL */
+.characters-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Kiwi', system-ui, sans-serif;
+    background-color: #5a2c00;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* =============================== */
+/* TÍTULOS */
+.section-title {
+    font-family: 'Kiwi', system-ui, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    margin: 15px 0;
+    padding: 8px 12px;
+    background: #fff;
+    border: 4px solid #df7126;
+    box-shadow: 0 4px 0 #b65310;
+    color: #b65310;
+    width: 100%;
+    max-width: 1600px;
+}
+
+/* =============================== */
+/* GRID PRINCIPAL – 5 COLUMNAS CENTRADO */
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px; /* un poco más de espacio entre cards */
+    width: 100%;
+    max-width: 1600px;
+    margin-bottom: 30px;
+
+    /* CENTRAR FILA */
+    justify-content: center; /* centra el grid horizontalmente */
+    justify-items: center;   /* centra cada card dentro de su columna */
+}
+
+/* Todos los cards ocupan 1 columna */
+.characters-grid .character-card {
+    grid-column: span 1;
+}
+
+/* =============================== */
+/* CARD más alto y espacioso */
+.character-card {
+    display: flex;
+    flex-direction: column;
+    background: #ff9c00;
+    border: 4px solid #df7126;
+    box-shadow: 0 4px 0 #b65310;
+    border-radius: 0;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    font-size: 0.85rem;
+    
+    /* Aumentamos la altura mínima */
+    min-height: 300px;
+    width: 100%; /* para respetar el grid */
+}
+
+.character-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #b65310;
+}
+
+/* =============================== */
+/* HEADER */
+.card-header {
+    font-family: 'Kiwi', system-ui, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #ffbf64;
+    border-bottom: 3px solid #df7126;
+}
+
+ion-card-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #b65310;
+}
+
+/* =============================== */
+/* BADGE */
+.selected-badge {
+    font-size: 10px;
+    background: #fff;
+    color: #000;
+    padding: 3px 5px;
+    border: 2px solid #df7126;
+    box-shadow: 0 2px 0 #b65310;
+}
+
+/* =============================== */
+/* RETRATO – MÁS GRANDE */
+.card-portrait {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px; /* un poco más de espacio */
+}
+
+.card-portrait ion-img {
+    width: 150px;  /* aumentado */
+    height: 150px; /* aumentado */
+    background: #fff;
+    border: 3px solid #df7126;
+    box-shadow: 0 4px 0 #b65310;
+    object-fit: cover;
+}
+
+/* =============================== */
+/* STATS */
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 12px;
+}
+
+.stat {
+    font-family: 'Kiwi', system-ui, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: bold;
+    background: #ffbf64;
+    color: #fff;
+    padding: 3px 6px;
+    border: 2px solid #df7126;
+    box-shadow: 0 2px 0 #b65310;
+}
+
+.stat-number {
+    font-family: 'Kiwi', system-ui, sans-serif;
+    color: #00a800;
+    background: #fff;
+    padding: 1px 4px;
+    border: 1px solid #df7126;
+    box-shadow: 0 1px 0 #b65310;
+}
+
+/* =============================== */
+/* BOTONES */
+.btn-primary {
+    font-family: 'Kiwi', system-ui, sans-serif;
+    margin-top: 6px;
+    --background: #ff7d00;
+    --color: #fff;
+    --border-radius: 0;
+    font-size: 12px;
+    box-shadow: 0px 0px 0px 2px #df7126, 0px 4px 0px 2px #b65310;
+}
+
+.btn-delete{
+    font-family: 'Kiwi', system-ui, sans-serif;
+    margin-top: 6px;
+    --background: #ce0000;
+    --color: #fff;
+    --border-radius: 0;
+    font-size: 12px;
+    box-shadow: 0px 0px 0px 2px #970404, 0px 4px 0px 2px #b10606;
+}
+
+.btn-secondary {
+    font-family: 'Kiwi', system-ui, sans-serif;
+    --background: #f2f2f2;
+    --color: #222;
+    --border-radius: 0;
+    font-size: 12px;
+    box-shadow: 0px 0px 0px 2px #bdbdbd, 0px 4px 0px 2px #8f8f8f;
+}
+
+/* =============================== */
+/* BOTÓN VOLVER */
+.back-button {
+    font-family: 'Kiwi', system-ui, sans-serif;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+}
+
+/* =============================== */
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .characters-grid {
+        grid-template-columns: repeat(3, 1fr); 
+        justify-content: center;
+    }
+}
+
+@media (max-width: 800px) {
+    .characters-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        justify-content: center;
+    }
+}
+
+@media (max-width: 500px) {
+    .characters-grid {
+        grid-template-columns: 1fr;
+        justify-content: center;
+    }
+}

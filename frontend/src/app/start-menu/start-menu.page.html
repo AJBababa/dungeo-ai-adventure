@@ -1,0 +1,49 @@
+<ion-content [fullscreen]="true">
+
+
+  <ion-grid id="starting-grid" *ngIf="started === false">
+    <ion-row>
+      <div id="started">
+        <img src="../../assets/dungeon-logo.png" alt="">
+        <h1>Welcome to Dungeo!</h1>
+        <h2>Click the button to start the adventure</h2>
+        <ion-button (click)="startAdventure()">Start Adventure</ion-button>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid id="menu-grid" *ngIf="started === true">
+
+    <div id="logo_div">
+      <p id="main-logo">Dungeo</p>
+    </div>
+
+    <ion-row>
+
+      <div class="menu-button" [class.disabled]="!isLogged" (click)="isLogged && movePage('characters')">
+        <h1>Personajes</h1>
+      </div>
+
+
+      <div class="menu-button" [class.disabled]="!isLogged" (click)="isLogged && movePage('game')">
+        <!-- Boton para dirigirse a la pagina de juego-->
+        <h1>Jugar</h1>
+      </div>
+
+
+    </ion-row>
+
+  </ion-grid>
+
+  <div id="log-in-out" *ngIf="started === true">
+    <ion-button (click)="login()">LogIn</ion-button>
+    <ion-button (click)="logout()">LogOut</ion-button>
+    <ion-button class="btn-secondary" (click)="goToInfo()">Information</ion-button>
+    <ion-button class="btn-secondary" (click)="goTavern()">Tavern</ion-button>
+  </div>
+
+  <div id="div-gif-menu" *ngIf="started === true">
+    <img src="assets/gif-menu.gif" id="gif-menu">
+  </div>
+
+</ion-content>

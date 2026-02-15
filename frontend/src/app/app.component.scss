@@ -1,0 +1,40 @@
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #df7126;
+  text-align: center;
+}
+
+.loading-logo {
+  width: min(520px, 80vw);
+  height: auto;
+  margin-bottom: 18px;
+}
+
+.loading-text {
+  font-size: 24px;
+  letter-spacing: 0.5px;
+}
+
+.dots span {
+  display: inline-block;
+  animation: dotBlink 1s infinite;
+}
+
+.dots span:nth-child(1) { animation-delay: 0s; }
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotBlink {
+  0%, 20% { opacity: 0.1; transform: translateY(0px); }
+  50%     { opacity: 1;   transform: translateY(-2px); }
+  100%    { opacity: 0.1; transform: translateY(0px); }
+}

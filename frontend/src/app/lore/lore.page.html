@@ -1,0 +1,93 @@
+<ion-content class="ion-padding lore-container">
+
+
+  <div class="lore-grid" *ngIf="!activeSection">
+
+    <!-- CARD UNIVERSO -->
+    <ion-card class="lore-card" (click)="activeSection = 'universe'">
+      <ion-card-header>
+        <ion-card-title>Universo</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Descubre la historia y el mundo del juego</p>
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-card class="lore-card" (click)="activeSection = 'characters'">
+      <ion-card-header>
+        <ion-card-title>Personajes</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Conoce a los héroes y NPCs</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="lore-card" (click)="activeSection = 'places'">
+      <ion-card-header>
+        <ion-card-title>Lugares</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Explora regiones y localizaciones</p>
+      </ion-card-content>
+    </ion-card>
+    <div class="back-button">
+      <ion-button class="btn-secondary" (click)="goBack()">
+        Volver
+      </ion-button>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="activeSection === 'universe'" class="lore-general">
+    <h2 class="section-title">Universo</h2>
+
+    <div class="universe-content">
+      <p>Erlar — Tierra de las Estrellas<br><br>
+
+Erlar es un mundo marcado por la caída de la “Estrella Madre”, que se fragmentó en ocho pedazos al tocar la tierra. Cada fragmento dejó un lugar extraordinario: ríos que brillan de noche, bosques que susurran constelaciones, montañas que atraen relámpagos y mares iluminados bajo las olas. Para sus habitantes, las estrellas son memoria, destino y maldición.<br><br>
+
+Verdad oculta:<br><br> La Estrella Madre es en realidad un sello que contiene una entidad ajena a Erlar. Al fracturarse, dejó un equilibrio frágil entre luz y sombra.<br><br>
+
+Historia perdida: Hace 500 años, Erlar central era el Reino de Asterion, gobernado por Halveth el Astral. Tenía tres hijos: Aelor, el Hijo del Alba, carismático y querido; Vaelor, el Hijo del Ocaso, frío y astuto; y Naelor, el Hijo del Velo, sabio y temido. Halveth dividió el reino para evitar guerra civil, dando lo fértil a Aelor y lo duro a Vaelor. Naelor desapareció con seguidores y libros prohibidos, prediciendo la ruptura del “equilibrio del sello estelar”. Hoy, su existencia se considera leyenda.<br><br>
+
+Temas para historias: Tensión entre belleza y resentimiento; religiones y cultos enfrentados sobre el poder estelar; facciones que buscan unir, destruir o trascender Erlar.</p>
+    </div>
+  </div>
+  <div *ngIf="activeSection === 'characters'" class="lore-section">
+    <h2 class="section-title">Personajes</h2>
+
+    <div class="scroll-section">
+      <ion-card *ngFor="let char of characters" class="lore-card small-card">
+        <ion-card-header>
+          <ion-card-title>{{ char.name }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ char.description }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <div *ngIf="activeSection === 'places'" class="lore-section">
+    <h2 class="section-title">Lugares</h2>
+
+    <div class="scroll-section">
+      <ion-card *ngFor="let place of places" class="lore-card small-card">
+        <ion-card-header>
+          <ion-card-title>{{ place.name }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ place.description }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <div class="back-button" *ngIf="activeSection">
+    <ion-button class="btn-secondary" (click)="activeSection = null">
+      Volver
+    </ion-button>
+  </div>
+
+</ion-content>

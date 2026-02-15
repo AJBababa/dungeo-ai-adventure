@@ -1,0 +1,59 @@
+<ion-content>
+  <div class="characters-container">
+    <!-- =============================== -->
+    <!-- PERSONAJES + COMPAÑERO ACTIVO -->
+    <h2 class="section-title">Personajes</h2>
+    <div class="characters-grid scroll-section">
+
+      <!-- Compañero activo primero -->
+      <ion-card *ngIf="currentCompanion" class="character-card">
+        <ion-card-header class="card-header">
+          <ion-card-title>{{ currentCompanion.name }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content class="card-portrait">
+          <ion-img [src]="currentCompanion.svg"></ion-img>
+        </ion-card-content>
+
+        <ion-card-content class="card-footer">
+          <div class="stat">❤️ Salud <span class="stat-number">{{ currentCompanion.health }}</span></div>
+          <div class="stat">💪 Fuerza <span class="stat-number">{{ currentCompanion.strenght }}</span></div>
+          <div class="stat">🏃 Agilidad <span class="stat-number">{{ currentCompanion.agility }}</span></div>
+          <div class="stat">🍀 Suerte <span class="stat-number">{{ currentCompanion.luck }}</span></div>
+
+          <ion-button color="danger" class="btn-delete" (click)="removeCompanion()">Eliminar Compañero</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Resto de personajes -->
+      <ion-card *ngFor="let character of characters" class="character-card">
+        <ion-card-header class="card-header">
+          <ion-card-title>{{ character.name }}</ion-card-title>
+
+        </ion-card-header>
+
+        <ion-card-content class="card-portrait">
+          <ion-img [src]="character.svg"></ion-img>
+        </ion-card-content>
+
+        <ion-card-content class="card-footer">
+          <div class="stat">❤️ Salud <span class="stat-number">{{ character.health }}</span></div>
+          <div class="stat">💪 Fuerza <span class="stat-number">{{ character.strenght }}</span></div>
+          <div class="stat">🏃 Agilidad <span class="stat-number">{{ character.agility }}</span></div>
+          <div class="stat">🍀 Suerte <span class="stat-number">{{ character.luck }}</span></div>
+
+          <ion-button class="btn-primary" (click)="selectCompanion(character.id)"
+            [disabled]="selectedCompanionId && selectedCompanionId !== character.id">
+            SELECT
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+
+    <!-- BOTÓN VOLVER -->
+    <div class="back-button">
+      <ion-button class="btn-secondary" (click)="goBack()">Volver</ion-button>
+    </div>
+  </div>
+</ion-content>

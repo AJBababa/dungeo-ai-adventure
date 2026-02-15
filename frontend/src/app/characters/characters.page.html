@@ -1,0 +1,221 @@
+<ion-content [fullscreen]="true">
+  <ion-grid class="page-grid">
+
+    <!-- VISTA 1: SOLO RECTÁNGULO CON + -->
+    <!-- LISTADO DE PERSONAJES -->
+    <!-- CONTENEDOR -->
+    <div *ngIf="!creating" class="characters-grid">
+
+      <!-- ADD CARD -->
+      <div class="add-card add-card--new" (click)="openCreate()">
+        <div class="card-header">
+          <span class="card-title">NEW</span>
+        </div>
+
+        <div class="card-portrait card-portrait--new">
+          <div class="plus-text">+</div>
+        </div>
+
+        <div class="card-footer">
+          <span class="card-chip">Crear</span>
+        </div>
+      </div>
+
+      <!-- PERSONAJES -->
+      <div class="add-card character-card" *ngFor="let char of characters" (click)="configureCharacter(char)"
+        [class.is-selected]="selectedCharacter?.id === char.id">
+        <div class="card-header">
+          <span class="card-title">{{ char.name }}</span>
+          <span class="selected-badge" *ngIf="selectedCharacter?.id === char.id">SELECTED</span>
+
+          <ion-button class="delete-btn" size="small" (click)="deleteCharacter(char.id); $event.stopPropagation()">
+            ✕
+          </ion-button>
+        </div>
+
+        <div class="card-portrait">
+          <img *ngIf="char.svg" [src]="char.svg" alt="Avatar" />
+        </div>
+
+
+        <div class="card-footer">
+          <span class="card-chip">LV {{ char.level ?? 1 }}</span>
+          <span class="card-chip">COIN {{ char.coin ?? 0 }}</span>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+    <!-- VISTA 2: FORMULARIO -->
+    <div *ngIf="creating" class="create-layout">
+      <div class="left-panel">
+        <div class="portrait-box">
+          <img *ngIf="avatarImage" [src]="avatarImage" alt="Avatar generado" />
+        </div>
+
+        <ion-button class="btn-icon" (click)="generateAvatarFromRace()"
+          [disabled]="generatingAvatar || avatarGenerated || !!avatarImage || !(race?.trim?.() ?? race)">
+          Random Icon
+        </ion-button>
+      </div>
+
+      <!-- derecha: form -->
+      <div class="form-box">
+        <label class="field-label">Nombre</label>
+        <ion-input class="field" [(ngModel)]="name" placeholder="Nombre del personaje"></ion-input>
+
+        <!-- Descripción
+        <label class="field-label">Descripcion</label>
+        <ion-textarea class="field textarea" [(ngModel)]="description" placeholder="Breve descripción" [maxlength]="512" [minlength]="40"></ion-textarea>
+        -->
+
+        <!-- razas -->
+
+        <label class="field-label">Raza</label>
+        <!-- editando  -->
+        <div *ngIf="editing_char; else raceSelector" class="field readonly-field">
+          {{ race }}
+        </div>
+
+        <!-- Descripción física -->
+        <label class="field-label">Descripción física</label>
+        <ion-textarea class="field textarea" [(ngModel)]="description"
+          placeholder="Altura, pelo, ojos, ropa, rasgos distintivos..." [maxlength]="512" autoGrow="true">
+        </ion-textarea>
+
+        <!-- creando -->
+        <ng-template #raceSelector>
+          <ion-select class="field" [(ngModel)]="race" placeholder="Selecciona una raza" interface="popover">
+            <ion-select-option *ngFor="let r of races" [value]="r">{{ r }}</ion-select-option>
+          </ion-select>
+        </ng-template>
+
+        <!-- puntos restantes -->
+        <div class="remaining-points" style="margin: 14px 0;">
+          <span class="field-label">Puntos restantes:</span>
+          <span style="margin-left: 10px; font-weight: 700;">{{ remainingPoints }}</span>
+        </div>
+
+        <div class="sliders">
+          <div class="slider-row">
+            <span class="slider-label">vida</span>
+
+            <ion-button size="small" fill="clear" class="stat-btn" (click)="decrease('health')"
+              [disabled]="health <= 10">
+              -
+            </ion-button>
+            <div class="stat-bar">
+              <div class="stat-bar-fill" [style.width.%]="(health / 200) * 100"></div>
+            </div>
+            <ion-button size="small" fill="clear" class="stat-btn" (click)="increase('health')"
+              [disabled]="remainingPoints <= 0 || health >= 200">
+              +
+            </ion-button>
+
+            <span class="slider-value">{{ health }}</span>
+          </div>
+
+          <!-- fuerza -->
+          <div class="slider-row">
+            <span class="slider-label">fuerza</span>
+
+            <ion-button size="small" fill="clear" class="stat-btn" (click)="decrease('strenght')"
+              [disabled]="strenght <= 10">
+              -
+            </ion-button>
+            <div class="stat-bar">
+              <div class="stat-bar-fill" [style.width.%]="(strenght / 200) * 100"></div>
+            </div>
+            <ion-button size="small" fill="clear" class="stat-btn" (click)="increase('strenght')"
+              [disabled]="remainingPoints <= 0 || strenght >= 200">
+              +
+            </ion-button>
+
+            <span class="slider-value">{{ strenght }}</span>
+          </div>
+
+          <!-- agilidad -->
+          <div class="slider-row">
+            <span class="slider-label">agilidad</span>
+
+            <ion-button size="small" fill="clear" class="stat-btn" (click)="decrease('agility')"
+              [disabled]="agility <= 10">
+              -
+            </ion-button>
+            <div class="stat-bar">
+              <div class="stat-bar-fill" [style.width.%]="(agility / 200) * 100"></div>
+            </div>
+            <ion-button size="small" fill="clear" class="stat-btn" (click)="increase('agility')"
+              [disabled]="remainingPoints <= 0 || agility >= 200">
+              +
+            </ion-button>
+
+            <span class="slider-value">{{ agility }}</span>
+          </div>
+
+          <!-- suerte -->
+          <div class="slider-row">
+            <span class="slider-label">suerte</span>
+
+            <ion-button size="small" fill="clear" class="stat-btn" (click)="decrease('luck')" [disabled]="luck <= 0">
+              -
+            </ion-button>
+            <div class="stat-bar">
+              <div class="stat-bar-fill" [style.width.%]="(luck / 200) * 100"></div>
+            </div>
+            <ion-button size="small" fill="clear" class="stat-btn" (click)="increase('luck')"
+              [disabled]="remainingPoints <= 0 || luck >= 200">
+              +
+            </ion-button>
+
+            <span class="slider-value">{{ luck }}</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <ion-button class="btn-secondary" (click)="cancelCreate()">Cancelar</ion-button>
+          <ion-button class="btn-primary" [disabled]="!name?.trim() || !(race?.trim?.()) || !avatarImage"
+            (click)="saveCharacter()">
+            Guardar
+          </ion-button>
+        </div>
+      </div>
+      <div id="registros_div" *ngIf="editing_char">
+        <!-- registros -->
+        <ng-container *ngIf="registros?.length > 0; else noRegistros">
+          <details class="registro-item" *ngFor="let reg of registros" (click)="clickSound()">
+            <summary class="registro-summary">
+              <span class="registro-title">{{ reg.nombre_aventura }}</span>
+              <span class="registro-toggle">+</span>
+            </summary>
+
+            <div class="registro-body">
+              <p class="registro-desc">{{ reg.descripcion }}</p>
+            </div>
+          </details>
+        </ng-container>
+
+        <!-- sin registros -->
+        <ng-template #noRegistros>
+          <div class="no-registros">No hay registro de partidas con este personaje</div>
+        </ng-template>
+      </div>
+
+
+    </div>
+
+
+  </ion-grid>
+
+  <!-- BOTÓN VOLVER -->
+  <div class="back-button" *ngIf="!creating">
+    <ion-button class="btn-secondary" (click)="goBack()">
+      Volver
+    </ion-button>
+  </div>
+
+</ion-content>

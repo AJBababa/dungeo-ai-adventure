@@ -1,0 +1,16 @@
+<ion-app>
+  <!-- FULLSCREEN LOADING OVERLAY -->
+  <div class="loading-overlay" *ngIf="showLoader">
+    <img class="loading-logo" src="assets/title.png" alt="Game logo" />
+
+    <div class="loading-text">
+      Loading
+      <span class="dots" aria-hidden="true">
+        <span>.</span><span>.</span><span>.</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Your app -->
+  <ion-router-outlet [animated]="false"></ion-router-outlet>
+</ion-app>

@@ -1,0 +1,103 @@
+<ion-content [fullscreen]="true">
+  <title>Dungeo</title>
+
+  <ion-grid id="game-grid" [ngStyle]="gridBgStyle">
+
+    <div id="character-div" *ngIf="character_choosen=== false">
+      <h1>Choose your character...</h1>
+      <ion-grid id="character-grid">
+        <ion-row id="character-row">
+          <ion-col id="character-col" *ngFor="let character of characters">
+            <h1>{{character.name}}</h1>
+            <h2>Health: {{character.health}}</h2>
+            <h2>Strength: {{character.strenght}}</h2>
+            <h2>Agility: {{character.agility}}</h2>
+            <h2>Luck: {{character.luck}}</h2>
+            <ion-button (click)="chooseCharacter(character.id)" id="character-button">Choose</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <ion-row> </ion-row>
+
+    <ion-row id="game-col">
+      <div id="characterinfo-div">
+        <h2 class="characterinfo-text">Vida: {{playerStats.vida}}</h2>
+        <h2 class="characterinfo-text">Fuerza: {{playerStats.fuerza}}</h2>
+        <h2 class="characterinfo-text">
+          Agilidad: {{playerStats.agilidad}}
+        </h2>
+        <h2 class="characterinfo-text">Suerte: {{playerStats.suerte}}</h2>
+      </div>
+
+      <div id="typing-blackout" *ngIf="typing === true"></div>
+      <div id="ia_box">
+        <div *ngFor="let response of this.response" class="ia_response">
+          <a> {{response.narrativa}} </a>
+          <br /><br />
+          <div *ngIf="response.showOptions">
+            <a *ngIf="game_ended === false">A: {{response.opcionA}}</a><br /><br />
+            <a *ngIf="game_ended === false">B: {{response.opcionB}}</a><br /><br />
+            <a *ngIf="game_ended === false">C: {{response.opcionC}}</a><br /><br />
+          </div>
+          <br>
+        </div>
+        <h1 *ngIf="loading === true" id="loading-text">Loading...</h1>
+      </div>
+
+      <br /><br />
+      <div class="options-box">
+        <ion-button class="option-button" id="button-a" (click)="sendPromptResponse('A')"
+          [disabled]="disable_option_buttons">A</ion-button>
+
+        <ion-button class="option-button" id="button-b" (click)="sendPromptResponse('B')"
+          [disabled]="disable_option_buttons">B</ion-button>
+
+        <ion-button class="option-button" id="button-c" (click)="sendPromptResponse('C')"
+          [disabled]="disable_option_buttons">C</ion-button>
+      </div>
+    </ion-row>
+
+    <ion-row></ion-row>
+  </ion-grid>
+
+  <ion-button class="back-menu-button" (click)="exitGame()">
+    Volver al menu
+  </ion-button>
+
+
+
+  <div *ngIf="!playerStats.alive && game_ended === true" class="death-overlay">
+  <div class="death-message">
+    <h2>HAS MUERTO</h2>
+    <p>La aventura ha terminado.</p>
+
+    <ion-button class="back-menu-button overlay-button" (click)="this.router.navigate(['/start-menu'])">
+      VOLVER AL MENÚ
+    </ion-button>
+
+    <ion-button class="back-menu-button overlay-button" (click)="changeVar()">
+      Keep reading
+    </ion-button>
+ 
+   </div>
+</div>
+
+<div *ngIf="finalBossDead && game_ended === true" class="win-overlay">
+  <div class="death-message win-message">
+    <h2>VICTORIA</h2>
+    <p>Has cumplido con el objetivo de la misión.</p>
+
+    <ion-button class="back-menu-button overlay-button" (click)="exitGame()">
+      VOLVER AL MENU
+    </ion-button>
+
+    <ion-button class="back-menu-button overlay-button" (click)="changeVar()">
+      Keep reading
+    </ion-button>
+
+  </div>
+</div>
+
+</ion-content>

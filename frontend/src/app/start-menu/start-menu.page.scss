@@ -1,0 +1,286 @@
+/* =============================== */
+/* ====== GLOBAL ================ */
+/* =============================== */
+
+ion-content {
+  --background: #5a2c00; /* flat tavern brown */
+}
+
+ion-grid {
+  width: 100%;
+  height: 100%;
+}
+
+ion-row {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =============================== */
+/* ====== START SCREEN ========== */
+/* =============================== */
+
+#starting-grid {
+  width: 100%;
+  height: 100%;
+  background-color: #5a2c00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#started {
+  background-color: #ff7d00;
+  color: #2b1400;
+
+  padding: clamp(32px, 6vw, 64px);
+  text-align: center;
+
+  font-family: 'Kiwi', system-ui, sans-serif;
+
+  border: 6px solid #df7126;
+  box-shadow:
+    0px 0px 0px 6px #df7126,
+    0px 14px 0px 6px #5a2c00;
+
+  image-rendering: pixelated;
+}
+
+#started img {
+  width: clamp(120px, 30vw, 200px);
+  margin-bottom: 24px;
+  image-rendering: pixelated;
+}
+
+#started h1 {
+  font-size: clamp(36px, 7vw, 64px);
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 0px #5a2c00;
+}
+
+#started h2 {
+  font-size: clamp(18px, 4vw, 28px);
+  font-weight: normal;
+  margin-bottom: 32px;
+}
+
+#started ion-button {
+  --background: #ffffff;
+  --color: #5a2c00;
+  --border-radius: 0px;
+
+  --padding-start: 32px;
+  --padding-end: 32px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+
+  font-family: 'Kiwi', system-ui, sans-serif;
+  font-size: clamp(18px, 4vw, 26px);
+  text-transform: none;
+
+  box-shadow:
+    0px 0px 0px 4px #df7126,
+    0px 8px 0px 4px #5a2c00;
+
+  image-rendering: pixelated;
+}
+
+#started ion-button:active {
+  transform: translateY(6px);
+  filter: brightness(0.9);
+}
+
+/* =============================== */
+/* ====== MENU SCREEN =========== */
+/* =============================== */
+
+#menu-grid {
+  width: 100%;
+  height: 100%;
+  background-color: #5a2c00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =============================== */
+/* ====== LOGO ================== */
+/* =============================== */
+
+#logo_div {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+#main-logo {
+  font-family: 'Kiwi', system-ui, sans-serif;
+  font-size: clamp(64px, 14vw, 140px);
+  color: #ffb347;
+  letter-spacing: 6px;
+
+  text-shadow:
+    4px 4px 0px #5a2c00,
+    0px 0px 12px #ff7d00;
+}
+
+/* =============================== */
+/* ====== MENU BUTTONS ========= */
+/* =============================== */
+
+ion-row {
+  gap: clamp(16px, 6vw, 48px);
+  flex-wrap: wrap;
+  z-index: 2;
+}
+
+.menu-button {
+  background-color: #ff7d00;
+  color: #2b1400;
+
+  width: min(260px, 80vw);
+  height: 160px;
+
+  font-family: 'Kiwi', system-ui, sans-serif;
+
+  /* 🔥 TAMAÑO CONTROLADO PARA “PERSONAJES” */
+  font-size: clamp(20px, 3.5vw, 32px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  border: 4px solid #df7126;
+
+  box-shadow:
+    0px 0px 0px 4px #df7126,
+    0px 10px 0px 4px #5a2c00;
+
+  cursor: pointer;
+  image-rendering: pixelated;
+}
+
+.menu-button h1 {
+  margin: 0;
+
+  font-size: 1em;
+  line-height: 1;
+
+  /* ⛔ PROHIBIR CUALQUIER SALTO */
+  white-space: nowrap;
+
+  /* 👌 ajuste fino para fuentes anchas */
+  letter-spacing: -0.5px;
+
+  max-width: 100%;
+}
+
+.menu-button:active {
+  transform: translateY(6px);
+  filter: brightness(0.9);
+  box-shadow:
+    0px 0px 0px 4px #df7126,
+    0px 2px 0px 4px #5a2c00;
+}
+
+/* Disabled state */
+.menu-button.disabled {
+  background-color: #9e9e9e;
+  color: #444;
+
+  box-shadow:
+    0px 0px 0px 4px #7a7a7a,
+    0px 8px 0px 4px #555;
+
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* =============================== */
+/* ====== LOGIN / LOGOUT ========= */
+/* =============================== */
+
+#log-in-out {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  gap: 12px;
+  z-index: 9999;
+}
+
+#log-in-out ion-button {
+  --background: #ff7d00;
+  --color: #ffffff;
+  --border-radius: 0px;
+
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+
+  font-family: 'Kiwi', system-ui, sans-serif;
+
+  box-shadow:
+    0px 0px 0px 3px #df7126,
+    0px 6px 0px 3px #5a2c00;
+
+  image-rendering: pixelated;
+}
+
+#log-in-out ion-button:active {
+  transform: translateY(4px);
+  filter: brightness(0.9);
+}
+
+/* =============================== */
+/* ====== GIF FOOTER ============ */
+/* =============================== */
+
+#div-gif-menu {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100vw;
+  height: clamp(160px, 25vh, 240px);
+
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#gif-menu {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  image-rendering: pixelated;
+  filter: contrast(1.1);
+}
+
+/* =============================== */
+/* ====== MOBILE TWEAKS ========= */
+/* =============================== */
+
+@media (max-width: 520px) {
+
+  #log-in-out {
+    flex-direction: column;
+    right: 10px;
+    top: 10px;
+  }
+
+  .menu-button {
+    height: 120px;
+    font-size: clamp(18px, 5vw, 26px);
+  }
+}
